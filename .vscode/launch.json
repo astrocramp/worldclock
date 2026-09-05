@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run World Clock Widget",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/WorldClockWidget/bin/Debug/net8.0-windows/WorldClockWidget.exe",
+      "cwd": "${workspaceFolder}/WorldClockWidget",
+      "console": "internalConsole"
+    }
+  ]
+}

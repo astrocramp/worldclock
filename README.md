@@ -1,0 +1,95 @@
+# World Clock Widget
+
+A small Windows desktop app that shows a scrollable, hour-by-hour time strip
+for several cities at once — similar to the "time comparison" view in the
+built-in Windows Clock app. Built with WPF (.NET 8) and C#.
+
+## What's in this project
+
+- `WorldClockWidget/MainWindow.xaml(.cs)` — the main window: the date
+  navigator bar and the scrollable hour grid.
+- `WorldClockWidget/AddCityWindow.xaml(.cs)` — the "Add city" search dialog.
+- `WorldClockWidget/Models/TimeZoneRow.cs` — a small class representing one
+  row (a city + its time zone).
+- `.vscode/tasks.json` and `.vscode/launch.json` — lets you build and debug
+  with F5 in VS Code.
+
+The app has no external dependencies — it only uses .NET's built-in
+`TimeZoneInfo` for time zone math, so there's nothing to download besides
+the .NET SDK itself.
+
+## 1. One-time setup on your Windows PC
+
+1. Install the **.NET 8 SDK**: https://dotnet.microsoft.com/download/dotnet/8.0
+   (pick the SDK, not just the runtime). Confirm it worked by opening a
+   terminal (PowerShell or cmd) and running:
+   ```
+   dotnet --version
+   ```
+   It should print something like `8.0.xxx`.
+2. In VS Code, install the **C# Dev Kit** extension (by Microsoft) from the
+   Extensions panel. This gives you IntelliSense, build/debug support, and
+   the ability to press F5 to run.
+3. Clone or copy this repository onto your Windows machine, then open the
+   `worldclock` folder in VS Code (`File > Open Folder`).
+
+## 2. Build and run
+
+From a terminal in the `worldclock` folder:
+
+```
+cd WorldClockWidget
+dotnet run
+```
+
+Or in VS Code, press **F5** (uses the included launch configuration) to build
+and run with the debugger attached — this is the best way to catch errors
+early and set breakpoints.
+
+The first `dotnet build`/`dotnet run` will be slower as NuGet restores the
+WPF build tooling; later runs are fast.
+
+## 3. Using the app
+
+- **Scroll** the hour strip left/right (mouse wheel, trackpad, or the
+  scrollbar) to see what time it'll be in each city.
+- **Click any hour cell** to highlight that column across every city — a
+  quick way to eyeball a meeting time.
+- **◀ / ▶** step the reference day backward/forward a day; **Today** jumps
+  back to now.
+- **+ Add city** opens a search box over every Windows time zone
+  (e.g. type "london" or "tokyo").
+- Each city row (except "Local time") has a small **✕** to remove it.
+- **Always on top** keeps the window pinned above other apps, so you can
+  treat it like a desktop widget.
+- The window is freely resizable (drag from the bottom-right corner) and
+  has ordinary minimize/maximize/close buttons.
+
+## 4. If something doesn't build
+
+Paste the exact error from the "Problems" tab or terminal into a Claude Code
+session (running from this same folder, on your Windows machine) and ask it
+to fix it. Iterating on real compiler errors is a normal — and genuinely
+useful — part of learning to work with Claude Code: it can read the error,
+open the relevant file, and propose a fix; you review the diff before
+accepting it.
+
+## 5. Ideas for your next Claude Code session (stretch goals)
+
+Once this is running, these are natural next steps to ask Claude Code for,
+roughly in order of difficulty:
+
+1. **Remember your cities** — save the added cities to a small JSON file
+   next to the app so they're still there next time you open it.
+2. **Live "now" marker** — a subtle timer that nudges the highlighted column
+   forward as real time passes, separate from your manually clicked column.
+3. **Polish the look** — rounded corners, a custom accent color, dark mode.
+4. **A borderless "widget" skin** — remove the standard window chrome and
+   draw a custom title bar, closer to the aesthetic of the real Windows
+   Widgets board (this is a good follow-up project once the basics feel
+   comfortable, since it involves lower-level window-dragging code).
+5. **The real Windows 11 Widgets Board** — actually docking into the widget
+   panel next to the taskbar. This requires MSIX packaging and registering a
+   COM "Widget Provider" with an Adaptive Cards UI — a substantially bigger,
+   more advanced project worth tackling separately once you're comfortable
+   with the basics here.

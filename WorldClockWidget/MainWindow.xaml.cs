@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using WorldClockWidget.Models;
@@ -16,11 +17,14 @@ public partial class MainWindow : Window
     private const int HoursAfter = 48;
     private const int TotalColumns = HoursBefore + HoursAfter;
 
+    private static readonly SolidColorBrush NightCellBrush = new(Color.FromRgb(0xE4, 0xE4, 0xEA));
+
     private readonly List<TimeZoneRow> _rows = new();
     private readonly List<TextBlock> _dateLabels = new();
     private DateTime[] _columnInstantsUtc = Array.Empty<DateTime>();
     private DateTime _baseDate = DateTime.Today;
     private int _selectedColumn;
+    private bool _alwaysOnTop;
 
     public MainWindow()
     {
@@ -63,22 +67,54 @@ public partial class MainWindow : Window
         ScrollToColumn(_selectedColumn);
     }
 
-    private void ShiftDay(int days)
+    private void SetBaseDate(DateTime newDate)
     {
         var hourOfDay = ((_selectedColumn - HoursBefore) % 24 + 24) % 24;
-        _baseDate = _baseDate.AddDays(days);
+        _baseDate = newDate.Date;
         _selectedColumn = HoursBefore + hourOfDay;
         BuildGrid();
         ScrollToColumn(_selectedColumn);
     }
 
-    private void PrevDayButton_Click(object sender, RoutedEventArgs e) => ShiftDay(-1);
+    private void AdjustMonth(int delta)
+    {
+        var year = _baseDate.Year;
+        var month = _baseDate.Month + delta;
+        while (month < 1) { month += 12; year--; }
+        while (month > 12) { month -= 12; year++; }
+        var day = Math.Min(_baseDate.Day, DateTime.DaysInMonth(year, month));
+        SetBaseDate(new DateTime(year, month, day));
+    }
 
-    private void NextDayButton_Click(object sender, RoutedEventArgs e) => ShiftDay(1);
+    private void AdjustDay(int delta) => SetBaseDate(_baseDate.AddDays(delta));
+
+    private void AdjustYear(int delta)
+    {
+        var year = _baseDate.Year + delta;
+        var day = Math.Min(_baseDate.Day, DateTime.DaysInMonth(year, _baseDate.Month));
+        SetBaseDate(new DateTime(year, _baseDate.Month, day));
+    }
 
     private void TodayButton_Click(object sender, RoutedEventArgs e) => GoToToday();
 
-    private void AlwaysOnTopCheckBox_Changed(object sender, RoutedEventArgs e) => Topmost = AlwaysOnTopCheckBox.IsChecked == true;
+    private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == MouseButtonState.Pressed)
+        {
+            DragMove();
+        }
+    }
+
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
+
+    private void PinButton_Click(object sender, RoutedEventArgs e)
+    {
+        _alwaysOnTop = !_alwaysOnTop;
+        Topmost = _alwaysOnTop;
+        PinIcon.Opacity = _alwaysOnTop ? 1.0 : 0.45;
+    }
 
     private void AddCityButton_Click(object sender, RoutedEventArgs e)
     {
@@ -118,6 +154,7 @@ public partial class MainWindow : Window
     private void BuildGrid()
     {
         BuildColumns();
+        BuildDateSpinners();
 
         HeaderPanel.Children.Clear();
         HourGrid.Children.Clear();
@@ -159,6 +196,54 @@ public partial class MainWindow : Window
         RefreshHeaders();
     }
 
+    private void BuildDateSpinners()
+    {
+        DateSpinnerPanel.Children.Clear();
+        DateSpinnerPanel.Children.Add(BuildDateSpinner(_baseDate.ToString("MMMM"), 92, AdjustMonth));
+        DateSpinnerPanel.Children.Add(BuildDateSpinner(_baseDate.Day.ToString(), 46, AdjustDay));
+        DateSpinnerPanel.Children.Add(BuildDateSpinner(_baseDate.Year.ToString(), 62, AdjustYear));
+    }
+
+    private UIElement BuildDateSpinner(string text, double width, Action<int> onAdjust)
+    {
+        var container = new StackPanel { Width = width, Margin = new Thickness(3, 0, 3, 0) };
+
+        var upButton = BuildSpinnerChevron("");
+        upButton.Click += (_, _) => onAdjust(1);
+
+        var label = new TextBlock
+        {
+            Text = text,
+            FontSize = 14,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            Margin = new Thickness(0, 1, 0, 1)
+        };
+
+        var downButton = BuildSpinnerChevron("");
+        downButton.Click += (_, _) => onAdjust(-1);
+
+        container.Children.Add(upButton);
+        container.Children.Add(label);
+        container.Children.Add(downButton);
+
+        container.PreviewMouseWheel += (_, e) =>
+        {
+            onAdjust(e.Delta > 0 ? 1 : -1);
+            e.Handled = true;
+        };
+
+        return container;
+    }
+
+    private Button BuildSpinnerChevron(string glyph)
+    {
+        return new Button
+        {
+            Content = new TextBlock { Text = glyph, FontFamily = new FontFamily("Segoe MDL2 Assets"), FontSize = 10 },
+            Style = (Style)FindResource("SpinnerChevronButtonStyle")
+        };
+    }
+
     private UIElement BuildHeaderCell(TimeZoneRow row)
     {
         var grid = new Grid { Height = RowHeight };
@@ -177,11 +262,8 @@ public partial class MainWindow : Window
         {
             var removeButton = new Button
             {
-                Content = "✕",
-                Width = 22,
-                Height = 22,
-                VerticalAlignment = VerticalAlignment.Top,
-                Margin = new Thickness(4, 4, 0, 0)
+                Content = new TextBlock { Text = "", FontFamily = new FontFamily("Segoe MDL2 Assets"), FontSize = 12 },
+                ToolTip = "Remove city"
             };
             removeButton.Click += (_, _) => RemoveRow(row);
             Grid.SetColumn(removeButton, 1);
@@ -220,10 +302,8 @@ public partial class MainWindow : Window
         var button = new Button
         {
             Content = stack,
-            Background = Brushes.Transparent,
-            BorderThickness = new Thickness(0, 0, 1, 1),
-            BorderBrush = new SolidColorBrush(Color.FromRgb(224, 224, 224)),
-            Focusable = false
+            Style = (Style)FindResource("HourCellButtonStyle"),
+            Background = isDay ? Brushes.Transparent : NightCellBrush
         };
         button.Click += (_, _) => SelectColumn(columnIndex);
         return button;
@@ -231,8 +311,6 @@ public partial class MainWindow : Window
 
     private void RefreshHeaders()
     {
-        DateLabel.Text = _baseDate.ToString("dddd, MMMM d, yyyy");
-
         var selectedInstantUtc = _columnInstantsUtc[_selectedColumn];
         var localOffset = TimeZoneInfo.Local.GetUtcOffset(selectedInstantUtc);
 

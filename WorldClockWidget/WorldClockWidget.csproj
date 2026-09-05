@@ -6,6 +6,11 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>WorldClockWidget</RootNamespace>
     <AssemblyName>WorldClockWidget</AssemblyName>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\AppIcon.ico" />
+  </ItemGroup>
 
 </Project>

@@ -6,6 +6,11 @@ public static class TimeZoneUtils
 {
     public static TimeZoneInfo TryFindTimeZone(string id)
     {
+        if (string.IsNullOrEmpty(id))
+        {
+            return null;
+        }
+
         try
         {
             return TimeZoneInfo.FindSystemTimeZoneById(id);

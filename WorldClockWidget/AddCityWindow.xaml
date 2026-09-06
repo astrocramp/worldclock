@@ -11,7 +11,7 @@
         </Grid.RowDefinitions>
 
         <TextBox x:Name="SearchBox" Grid.Row="0" Margin="0,0,0,8" TextChanged="SearchBox_TextChanged"/>
-        <ListBox x:Name="ZoneList" Grid.Row="1" DisplayMemberPath="DisplayName" MouseDoubleClick="ZoneList_MouseDoubleClick"/>
+        <ListBox x:Name="ZoneList" Grid.Row="1" DisplayMemberPath="Label" MouseDoubleClick="ZoneList_MouseDoubleClick"/>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
             <Button Content="Cancel" Width="80" Margin="0,0,8,0" Click="CancelButton_Click"/>

@@ -147,7 +147,10 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,2,10,2">
             <StackPanel x:Name="DateSpinnerPanel" Orientation="Horizontal" VerticalAlignment="Center"/>
 
-            <Button x:Name="TodayButton" Click="TodayButton_Click" Margin="16,0,0,0" ToolTip="Jump to today">
+            <Button x:Name="AddToCalendarButton" Click="AddToCalendarButton_Click" Margin="16,0,0,0" ToolTip="Create a calendar invite for the selected time">
+                <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="18"/>
+            </Button>
+            <Button x:Name="TodayButton" Click="TodayButton_Click" Margin="2,0,0,0" ToolTip="Jump to today">
                 <TextBlock Text="&#xE8D1;" FontFamily="Segoe MDL2 Assets" FontSize="18"/>
             </Button>
             <Button x:Name="AddCityButton" Click="AddCityButton_Click" Margin="2,0,0,0" ToolTip="Add city">

@@ -1,0 +1,927 @@
+[
+  {
+    "city": "Honolulu",
+    "country": "USA",
+    "timeZoneId": "Hawaiian Standard Time"
+  },
+  {
+    "city": "Anchorage",
+    "country": "USA",
+    "timeZoneId": "Alaskan Standard Time"
+  },
+  {
+    "city": "Los Angeles",
+    "country": "USA",
+    "timeZoneId": "Pacific Standard Time"
+  },
+  {
+    "city": "San Francisco",
+    "country": "USA",
+    "timeZoneId": "Pacific Standard Time"
+  },
+  {
+    "city": "Seattle",
+    "country": "USA",
+    "timeZoneId": "Pacific Standard Time"
+  },
+  {
+    "city": "Vancouver",
+    "country": "Canada",
+    "timeZoneId": "Pacific Standard Time"
+  },
+  {
+    "city": "Tijuana",
+    "country": "Mexico",
+    "timeZoneId": "Pacific Standard Time (Mexico)"
+  },
+  {
+    "city": "Phoenix",
+    "country": "USA",
+    "timeZoneId": "US Mountain Standard Time"
+  },
+  {
+    "city": "Denver",
+    "country": "USA",
+    "timeZoneId": "Mountain Standard Time"
+  },
+  {
+    "city": "Calgary",
+    "country": "Canada",
+    "timeZoneId": "Mountain Standard Time"
+  },
+  {
+    "city": "Mexico City",
+    "country": "Mexico",
+    "timeZoneId": "Central Standard Time (Mexico)"
+  },
+  {
+    "city": "Chicago",
+    "country": "USA",
+    "timeZoneId": "Central Standard Time"
+  },
+  {
+    "city": "Dallas",
+    "country": "USA",
+    "timeZoneId": "Central Standard Time"
+  },
+  {
+    "city": "Houston",
+    "country": "USA",
+    "timeZoneId": "Central Standard Time"
+  },
+  {
+    "city": "Winnipeg",
+    "country": "Canada",
+    "timeZoneId": "Central Standard Time"
+  },
+  {
+    "city": "New York",
+    "country": "USA",
+    "timeZoneId": "Eastern Standard Time"
+  },
+  {
+    "city": "Washington, D.C.",
+    "country": "USA",
+    "timeZoneId": "Eastern Standard Time"
+  },
+  {
+    "city": "Miami",
+    "country": "USA",
+    "timeZoneId": "Eastern Standard Time"
+  },
+  {
+    "city": "Toronto",
+    "country": "Canada",
+    "timeZoneId": "Eastern Standard Time"
+  },
+  {
+    "city": "Montreal",
+    "country": "Canada",
+    "timeZoneId": "Eastern Standard Time"
+  },
+  {
+    "city": "Ottawa",
+    "country": "Canada",
+    "timeZoneId": "Eastern Standard Time"
+  },
+  {
+    "city": "Havana",
+    "country": "Cuba",
+    "timeZoneId": "Cuba Standard Time"
+  },
+  {
+    "city": "Halifax",
+    "country": "Canada",
+    "timeZoneId": "Atlantic Standard Time"
+  },
+  {
+    "city": "Bermuda",
+    "country": "Bermuda",
+    "timeZoneId": "Atlantic Standard Time"
+  },
+  {
+    "city": "St. John's",
+    "country": "Canada",
+    "timeZoneId": "Newfoundland Standard Time"
+  },
+  {
+    "city": "Bogota",
+    "country": "Colombia",
+    "timeZoneId": "SA Pacific Standard Time"
+  },
+  {
+    "city": "Lima",
+    "country": "Peru",
+    "timeZoneId": "SA Pacific Standard Time"
+  },
+  {
+    "city": "Quito",
+    "country": "Ecuador",
+    "timeZoneId": "SA Pacific Standard Time"
+  },
+  {
+    "city": "Panama City",
+    "country": "Panama",
+    "timeZoneId": "SA Pacific Standard Time"
+  },
+  {
+    "city": "San Jose",
+    "country": "Costa Rica",
+    "timeZoneId": "Central America Standard Time"
+  },
+  {
+    "city": "Guatemala City",
+    "country": "Guatemala",
+    "timeZoneId": "Central America Standard Time"
+  },
+  {
+    "city": "Caracas",
+    "country": "Venezuela",
+    "timeZoneId": "Venezuela Standard Time"
+  },
+  {
+    "city": "La Paz",
+    "country": "Bolivia",
+    "timeZoneId": "SA Western Standard Time"
+  },
+  {
+    "city": "Santiago",
+    "country": "Chile",
+    "timeZoneId": "Pacific SA Standard Time"
+  },
+  {
+    "city": "Sao Paulo",
+    "country": "Brazil",
+    "timeZoneId": "E. South America Standard Time"
+  },
+  {
+    "city": "Rio de Janeiro",
+    "country": "Brazil",
+    "timeZoneId": "E. South America Standard Time"
+  },
+  {
+    "city": "Buenos Aires",
+    "country": "Argentina",
+    "timeZoneId": "Argentina Standard Time"
+  },
+  {
+    "city": "Montevideo",
+    "country": "Uruguay",
+    "timeZoneId": "Montevideo Standard Time"
+  },
+  {
+    "city": "Asuncion",
+    "country": "Paraguay",
+    "timeZoneId": "Paraguay Standard Time"
+  },
+  {
+    "city": "Reykjavik",
+    "country": "Iceland",
+    "timeZoneId": "Greenwich Standard Time"
+  },
+  {
+    "city": "Ponta Delgada",
+    "country": "Portugal",
+    "timeZoneId": "Azores Standard Time"
+  },
+  {
+    "city": "Praia",
+    "country": "Cape Verde",
+    "timeZoneId": "Cape Verde Standard Time"
+  },
+  {
+    "city": "London",
+    "country": "United Kingdom",
+    "timeZoneId": "GMT Standard Time"
+  },
+  {
+    "city": "Dublin",
+    "country": "Ireland",
+    "timeZoneId": "GMT Standard Time"
+  },
+  {
+    "city": "Lisbon",
+    "country": "Portugal",
+    "timeZoneId": "GMT Standard Time"
+  },
+  {
+    "city": "Casablanca",
+    "country": "Morocco",
+    "timeZoneId": "Morocco Standard Time"
+  },
+  {
+    "city": "Madrid",
+    "country": "Spain",
+    "timeZoneId": "Romance Standard Time"
+  },
+  {
+    "city": "Barcelona",
+    "country": "Spain",
+    "timeZoneId": "Romance Standard Time"
+  },
+  {
+    "city": "Paris",
+    "country": "France",
+    "timeZoneId": "Romance Standard Time"
+  },
+  {
+    "city": "Brussels",
+    "country": "Belgium",
+    "timeZoneId": "Romance Standard Time"
+  },
+  {
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "timeZoneId": "Romance Standard Time"
+  },
+  {
+    "city": "Berlin",
+    "country": "Germany",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Munich",
+    "country": "Germany",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Frankfurt",
+    "country": "Germany",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Hamburg",
+    "country": "Germany",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Amsterdam",
+    "country": "Netherlands",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Rome",
+    "country": "Italy",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Milan",
+    "country": "Italy",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Vienna",
+    "country": "Austria",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Zurich",
+    "country": "Switzerland",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Geneva",
+    "country": "Switzerland",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Stockholm",
+    "country": "Sweden",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Oslo",
+    "country": "Norway",
+    "timeZoneId": "W. Europe Standard Time"
+  },
+  {
+    "city": "Warsaw",
+    "country": "Poland",
+    "timeZoneId": "Central European Standard Time"
+  },
+  {
+    "city": "Zagreb",
+    "country": "Croatia",
+    "timeZoneId": "Central European Standard Time"
+  },
+  {
+    "city": "Prague",
+    "country": "Czechia",
+    "timeZoneId": "Central Europe Standard Time"
+  },
+  {
+    "city": "Budapest",
+    "country": "Hungary",
+    "timeZoneId": "Central Europe Standard Time"
+  },
+  {
+    "city": "Bratislava",
+    "country": "Slovakia",
+    "timeZoneId": "Central Europe Standard Time"
+  },
+  {
+    "city": "Ljubljana",
+    "country": "Slovenia",
+    "timeZoneId": "Central Europe Standard Time"
+  },
+  {
+    "city": "Belgrade",
+    "country": "Serbia",
+    "timeZoneId": "Central Europe Standard Time"
+  },
+  {
+    "city": "Sarajevo",
+    "country": "Bosnia and Herzegovina",
+    "timeZoneId": "Central European Standard Time"
+  },
+  {
+    "city": "Skopje",
+    "country": "North Macedonia",
+    "timeZoneId": "Central European Standard Time"
+  },
+  {
+    "city": "Helsinki",
+    "country": "Finland",
+    "timeZoneId": "FLE Standard Time"
+  },
+  {
+    "city": "Riga",
+    "country": "Latvia",
+    "timeZoneId": "FLE Standard Time"
+  },
+  {
+    "city": "Tallinn",
+    "country": "Estonia",
+    "timeZoneId": "FLE Standard Time"
+  },
+  {
+    "city": "Vilnius",
+    "country": "Lithuania",
+    "timeZoneId": "FLE Standard Time"
+  },
+  {
+    "city": "Sofia",
+    "country": "Bulgaria",
+    "timeZoneId": "FLE Standard Time"
+  },
+  {
+    "city": "Kyiv",
+    "country": "Ukraine",
+    "timeZoneId": "FLE Standard Time"
+  },
+  {
+    "city": "Athens",
+    "country": "Greece",
+    "timeZoneId": "GTB Standard Time"
+  },
+  {
+    "city": "Bucharest",
+    "country": "Romania",
+    "timeZoneId": "GTB Standard Time"
+  },
+  {
+    "city": "Nicosia",
+    "country": "Cyprus",
+    "timeZoneId": "GTB Standard Time"
+  },
+  {
+    "city": "Istanbul",
+    "country": "Turkey",
+    "timeZoneId": "Turkey Standard Time"
+  },
+  {
+    "city": "Minsk",
+    "country": "Belarus",
+    "timeZoneId": "Belarus Standard Time"
+  },
+  {
+    "city": "Moscow",
+    "country": "Russia",
+    "timeZoneId": "Russian Standard Time"
+  },
+  {
+    "city": "Kaliningrad",
+    "country": "Russia",
+    "timeZoneId": "Kaliningrad Standard Time"
+  },
+  {
+    "city": "Jerusalem",
+    "country": "Israel",
+    "timeZoneId": "Israel Standard Time"
+  },
+  {
+    "city": "Tel Aviv",
+    "country": "Israel",
+    "timeZoneId": "Israel Standard Time"
+  },
+  {
+    "city": "Beirut",
+    "country": "Lebanon",
+    "timeZoneId": "Middle East Standard Time"
+  },
+  {
+    "city": "Damascus",
+    "country": "Syria",
+    "timeZoneId": "Syria Standard Time"
+  },
+  {
+    "city": "Amman",
+    "country": "Jordan",
+    "timeZoneId": "Jordan Standard Time"
+  },
+  {
+    "city": "Baghdad",
+    "country": "Iraq",
+    "timeZoneId": "Arabic Standard Time"
+  },
+  {
+    "city": "Kuwait City",
+    "country": "Kuwait",
+    "timeZoneId": "Arab Standard Time"
+  },
+  {
+    "city": "Riyadh",
+    "country": "Saudi Arabia",
+    "timeZoneId": "Arab Standard Time"
+  },
+  {
+    "city": "Jeddah",
+    "country": "Saudi Arabia",
+    "timeZoneId": "Arab Standard Time"
+  },
+  {
+    "city": "Manama",
+    "country": "Bahrain",
+    "timeZoneId": "Arab Standard Time"
+  },
+  {
+    "city": "Doha",
+    "country": "Qatar",
+    "timeZoneId": "Arab Standard Time"
+  },
+  {
+    "city": "Abu Dhabi",
+    "country": "United Arab Emirates",
+    "timeZoneId": "Arabian Standard Time"
+  },
+  {
+    "city": "Dubai",
+    "country": "United Arab Emirates",
+    "timeZoneId": "Arabian Standard Time"
+  },
+  {
+    "city": "Muscat",
+    "country": "Oman",
+    "timeZoneId": "Arabian Standard Time"
+  },
+  {
+    "city": "Tehran",
+    "country": "Iran",
+    "timeZoneId": "Iran Standard Time"
+  },
+  {
+    "city": "Baku",
+    "country": "Azerbaijan",
+    "timeZoneId": "Azerbaijan Standard Time"
+  },
+  {
+    "city": "Tbilisi",
+    "country": "Georgia",
+    "timeZoneId": "Georgian Standard Time"
+  },
+  {
+    "city": "Yerevan",
+    "country": "Armenia",
+    "timeZoneId": "Caucasus Standard Time"
+  },
+  {
+    "city": "Kabul",
+    "country": "Afghanistan",
+    "timeZoneId": "Afghanistan Standard Time"
+  },
+  {
+    "city": "Cairo",
+    "country": "Egypt",
+    "timeZoneId": "Egypt Standard Time"
+  },
+  {
+    "city": "Alexandria",
+    "country": "Egypt",
+    "timeZoneId": "Egypt Standard Time"
+  },
+  {
+    "city": "Tripoli",
+    "country": "Libya",
+    "timeZoneId": "Libya Standard Time"
+  },
+  {
+    "city": "Tunis",
+    "country": "Tunisia",
+    "timeZoneId": "W. Central Africa Standard Time"
+  },
+  {
+    "city": "Algiers",
+    "country": "Algeria",
+    "timeZoneId": "W. Central Africa Standard Time"
+  },
+  {
+    "city": "Lagos",
+    "country": "Nigeria",
+    "timeZoneId": "W. Central Africa Standard Time"
+  },
+  {
+    "city": "Abuja",
+    "country": "Nigeria",
+    "timeZoneId": "W. Central Africa Standard Time"
+  },
+  {
+    "city": "Kinshasa",
+    "country": "DR Congo",
+    "timeZoneId": "W. Central Africa Standard Time"
+  },
+  {
+    "city": "Luanda",
+    "country": "Angola",
+    "timeZoneId": "W. Central Africa Standard Time"
+  },
+  {
+    "city": "Khartoum",
+    "country": "Sudan",
+    "timeZoneId": "Sudan Standard Time"
+  },
+  {
+    "city": "Addis Ababa",
+    "country": "Ethiopia",
+    "timeZoneId": "E. Africa Standard Time"
+  },
+  {
+    "city": "Nairobi",
+    "country": "Kenya",
+    "timeZoneId": "E. Africa Standard Time"
+  },
+  {
+    "city": "Dar es Salaam",
+    "country": "Tanzania",
+    "timeZoneId": "E. Africa Standard Time"
+  },
+  {
+    "city": "Kampala",
+    "country": "Uganda",
+    "timeZoneId": "E. Africa Standard Time"
+  },
+  {
+    "city": "Mogadishu",
+    "country": "Somalia",
+    "timeZoneId": "E. Africa Standard Time"
+  },
+  {
+    "city": "Johannesburg",
+    "country": "South Africa",
+    "timeZoneId": "South Africa Standard Time"
+  },
+  {
+    "city": "Cape Town",
+    "country": "South Africa",
+    "timeZoneId": "South Africa Standard Time"
+  },
+  {
+    "city": "Harare",
+    "country": "Zimbabwe",
+    "timeZoneId": "South Africa Standard Time"
+  },
+  {
+    "city": "Lusaka",
+    "country": "Zambia",
+    "timeZoneId": "South Africa Standard Time"
+  },
+  {
+    "city": "Maputo",
+    "country": "Mozambique",
+    "timeZoneId": "South Africa Standard Time"
+  },
+  {
+    "city": "Gaborone",
+    "country": "Botswana",
+    "timeZoneId": "South Africa Standard Time"
+  },
+  {
+    "city": "Windhoek",
+    "country": "Namibia",
+    "timeZoneId": "Namibia Standard Time"
+  },
+  {
+    "city": "Accra",
+    "country": "Ghana",
+    "timeZoneId": "Greenwich Standard Time"
+  },
+  {
+    "city": "Dakar",
+    "country": "Senegal",
+    "timeZoneId": "Greenwich Standard Time"
+  },
+  {
+    "city": "Abidjan",
+    "country": "Ivory Coast",
+    "timeZoneId": "Greenwich Standard Time"
+  },
+  {
+    "city": "Port Louis",
+    "country": "Mauritius",
+    "timeZoneId": "Mauritius Standard Time"
+  },
+  {
+    "city": "Karachi",
+    "country": "Pakistan",
+    "timeZoneId": "Pakistan Standard Time"
+  },
+  {
+    "city": "Islamabad",
+    "country": "Pakistan",
+    "timeZoneId": "Pakistan Standard Time"
+  },
+  {
+    "city": "Lahore",
+    "country": "Pakistan",
+    "timeZoneId": "Pakistan Standard Time"
+  },
+  {
+    "city": "Tashkent",
+    "country": "Uzbekistan",
+    "timeZoneId": "West Asia Standard Time"
+  },
+  {
+    "city": "Ashgabat",
+    "country": "Turkmenistan",
+    "timeZoneId": "West Asia Standard Time"
+  },
+  {
+    "city": "New Delhi",
+    "country": "India",
+    "timeZoneId": "India Standard Time"
+  },
+  {
+    "city": "Mumbai",
+    "country": "India",
+    "timeZoneId": "India Standard Time"
+  },
+  {
+    "city": "Bangalore",
+    "country": "India",
+    "timeZoneId": "India Standard Time"
+  },
+  {
+    "city": "Chennai",
+    "country": "India",
+    "timeZoneId": "India Standard Time"
+  },
+  {
+    "city": "Kolkata",
+    "country": "India",
+    "timeZoneId": "India Standard Time"
+  },
+  {
+    "city": "Hyderabad",
+    "country": "India",
+    "timeZoneId": "India Standard Time"
+  },
+  {
+    "city": "Colombo",
+    "country": "Sri Lanka",
+    "timeZoneId": "Sri Lanka Standard Time"
+  },
+  {
+    "city": "Kathmandu",
+    "country": "Nepal",
+    "timeZoneId": "Nepal Standard Time"
+  },
+  {
+    "city": "Almaty",
+    "country": "Kazakhstan",
+    "timeZoneId": "Central Asia Standard Time"
+  },
+  {
+    "city": "Astana",
+    "country": "Kazakhstan",
+    "timeZoneId": "Central Asia Standard Time"
+  },
+  {
+    "city": "Dhaka",
+    "country": "Bangladesh",
+    "timeZoneId": "Bangladesh Standard Time"
+  },
+  {
+    "city": "Yangon",
+    "country": "Myanmar",
+    "timeZoneId": "Myanmar Standard Time"
+  },
+  {
+    "city": "Bangkok",
+    "country": "Thailand",
+    "timeZoneId": "SE Asia Standard Time"
+  },
+  {
+    "city": "Hanoi",
+    "country": "Vietnam",
+    "timeZoneId": "SE Asia Standard Time"
+  },
+  {
+    "city": "Ho Chi Minh City",
+    "country": "Vietnam",
+    "timeZoneId": "SE Asia Standard Time"
+  },
+  {
+    "city": "Jakarta",
+    "country": "Indonesia",
+    "timeZoneId": "SE Asia Standard Time"
+  },
+  {
+    "city": "Phnom Penh",
+    "country": "Cambodia",
+    "timeZoneId": "SE Asia Standard Time"
+  },
+  {
+    "city": "Vientiane",
+    "country": "Laos",
+    "timeZoneId": "SE Asia Standard Time"
+  },
+  {
+    "city": "Singapore",
+    "country": "Singapore",
+    "timeZoneId": "Singapore Standard Time"
+  },
+  {
+    "city": "Kuala Lumpur",
+    "country": "Malaysia",
+    "timeZoneId": "Singapore Standard Time"
+  },
+  {
+    "city": "Manila",
+    "country": "Philippines",
+    "timeZoneId": "Taipei Standard Time"
+  },
+  {
+    "city": "Beijing",
+    "country": "China",
+    "timeZoneId": "China Standard Time"
+  },
+  {
+    "city": "Shanghai",
+    "country": "China",
+    "timeZoneId": "China Standard Time"
+  },
+  {
+    "city": "Hong Kong",
+    "country": "Hong Kong",
+    "timeZoneId": "China Standard Time"
+  },
+  {
+    "city": "Chongqing",
+    "country": "China",
+    "timeZoneId": "China Standard Time"
+  },
+  {
+    "city": "Taipei",
+    "country": "Taiwan",
+    "timeZoneId": "Taipei Standard Time"
+  },
+  {
+    "city": "Perth",
+    "country": "Australia",
+    "timeZoneId": "W. Australia Standard Time"
+  },
+  {
+    "city": "Ulaanbaatar",
+    "country": "Mongolia",
+    "timeZoneId": "Ulaanbaatar Standard Time"
+  },
+  {
+    "city": "Tokyo",
+    "country": "Japan",
+    "timeZoneId": "Tokyo Standard Time"
+  },
+  {
+    "city": "Osaka",
+    "country": "Japan",
+    "timeZoneId": "Tokyo Standard Time"
+  },
+  {
+    "city": "Seoul",
+    "country": "South Korea",
+    "timeZoneId": "Korea Standard Time"
+  },
+  {
+    "city": "Pyongyang",
+    "country": "North Korea",
+    "timeZoneId": "North Korea Standard Time"
+  },
+  {
+    "city": "Adelaide",
+    "country": "Australia",
+    "timeZoneId": "Cen. Australia Standard Time"
+  },
+  {
+    "city": "Darwin",
+    "country": "Australia",
+    "timeZoneId": "AUS Central Standard Time"
+  },
+  {
+    "city": "Brisbane",
+    "country": "Australia",
+    "timeZoneId": "E. Australia Standard Time"
+  },
+  {
+    "city": "Sydney",
+    "country": "Australia",
+    "timeZoneId": "AUS Eastern Standard Time"
+  },
+  {
+    "city": "Melbourne",
+    "country": "Australia",
+    "timeZoneId": "AUS Eastern Standard Time"
+  },
+  {
+    "city": "Canberra",
+    "country": "Australia",
+    "timeZoneId": "AUS Eastern Standard Time"
+  },
+  {
+    "city": "Hobart",
+    "country": "Australia",
+    "timeZoneId": "Tasmania Standard Time"
+  },
+  {
+    "city": "Guam",
+    "country": "Guam",
+    "timeZoneId": "West Pacific Standard Time"
+  },
+  {
+    "city": "Port Moresby",
+    "country": "Papua New Guinea",
+    "timeZoneId": "West Pacific Standard Time"
+  },
+  {
+    "city": "Noumea",
+    "country": "New Caledonia",
+    "timeZoneId": "Central Pacific Standard Time"
+  },
+  {
+    "city": "Honiara",
+    "country": "Solomon Islands",
+    "timeZoneId": "Central Pacific Standard Time"
+  },
+  {
+    "city": "Auckland",
+    "country": "New Zealand",
+    "timeZoneId": "New Zealand Standard Time"
+  },
+  {
+    "city": "Wellington",
+    "country": "New Zealand",
+    "timeZoneId": "New Zealand Standard Time"
+  },
+  {
+    "city": "Suva",
+    "country": "Fiji",
+    "timeZoneId": "Fiji Standard Time"
+  },
+  {
+    "city": "Nuku'alofa",
+    "country": "Tonga",
+    "timeZoneId": "Tonga Standard Time"
+  },
+  {
+    "city": "Apia",
+    "country": "Samoa",
+    "timeZoneId": "Samoa Standard Time"
+  },
+  {
+    "city": "Kiritimati",
+    "country": "Kiribati",
+    "timeZoneId": "Line Islands Standard Time"
+  },
+  {
+    "city": "Papeete",
+    "country": "French Polynesia",
+    "timeZoneId": "Hawaiian Standard Time"
+  }
+]

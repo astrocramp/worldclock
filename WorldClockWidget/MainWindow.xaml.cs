@@ -1,5 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,6 +24,10 @@ public partial class MainWindow : Window
 
     private static readonly SolidColorBrush NightCellBrush = new(Color.FromRgb(0xE4, 0xE4, 0xEA));
 
+    private static readonly string SettingsDirectory = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WorldClockWidget");
+    private static readonly string SettingsPath = Path.Combine(SettingsDirectory, "cities.json");
+
     private readonly List<TimeZoneRow> _rows = new();
     private readonly List<TextBlock> _dateLabels = new();
     private DateTime[] _columnInstantsUtc = Array.Empty<DateTime>();
@@ -31,32 +40,60 @@ public partial class MainWindow : Window
         InitializeComponent();
 
         _rows.Add(new TimeZoneRow("Local time", TimeZoneInfo.Local, isLocal: true));
-        var tokyo = TryFindTimeZone("Tokyo Standard Time");
-        if (tokyo != null)
+
+        if (File.Exists(SettingsPath))
         {
-            _rows.Add(new TimeZoneRow(FriendlyZoneName(tokyo), tokyo));
+            LoadSavedCities();
+        }
+        else
+        {
+            var tokyo = TimeZoneUtils.TryFindTimeZone("Tokyo Standard Time");
+            if (tokyo != null)
+            {
+                _rows.Add(new TimeZoneRow("Tokyo, Japan", tokyo));
+            }
+            SaveCities();
         }
 
         Loaded += (_, _) => GoToToday();
     }
 
-    private static TimeZoneInfo TryFindTimeZone(string id)
+    private void LoadSavedCities()
     {
         try
         {
-            return TimeZoneInfo.FindSystemTimeZoneById(id);
+            var json = File.ReadAllText(SettingsPath);
+            var saved = JsonSerializer.Deserialize<List<SavedCity>>(json) ?? new List<SavedCity>();
+            foreach (var city in saved)
+            {
+                var zone = TimeZoneUtils.TryFindTimeZone(city.TimeZoneId);
+                if (zone != null)
+                {
+                    _rows.Add(new TimeZoneRow(city.DisplayName, zone));
+                }
+            }
         }
-        catch (TimeZoneNotFoundException)
+        catch (Exception ex) when (ex is IOException or JsonException)
         {
-            return null;
+            // Ignore a corrupt or unreadable settings file and start with just Local time.
         }
     }
 
-    private static string FriendlyZoneName(TimeZoneInfo zone)
+    private void SaveCities()
     {
-        var name = zone.DisplayName;
-        var parenEnd = name.IndexOf(')');
-        return parenEnd >= 0 && parenEnd + 1 < name.Length ? name[(parenEnd + 1)..].Trim() : name;
+        try
+        {
+            Directory.CreateDirectory(SettingsDirectory);
+            var saved = _rows
+                .Where(r => !r.IsLocal)
+                .Select(r => new SavedCity { DisplayName = r.DisplayName, TimeZoneId = r.Zone.Id })
+                .ToList();
+            File.WriteAllText(SettingsPath, JsonSerializer.Serialize(saved));
+        }
+        catch (IOException)
+        {
+            // Not being able to persist cities isn't fatal - just try again next change.
+        }
     }
 
     private void GoToToday()
@@ -121,8 +158,9 @@ public partial class MainWindow : Window
         var dialog = new AddCityWindow { Owner = this };
         if (dialog.ShowDialog() == true && dialog.SelectedTimeZone != null)
         {
-            _rows.Add(new TimeZoneRow(FriendlyZoneName(dialog.SelectedTimeZone), dialog.SelectedTimeZone));
+            _rows.Add(new TimeZoneRow(dialog.SelectedDisplayName, dialog.SelectedTimeZone));
             BuildGrid();
+            SaveCities();
         }
     }
 
@@ -130,6 +168,51 @@ public partial class MainWindow : Window
     {
         _rows.Remove(row);
         BuildGrid();
+        SaveCities();
+    }
+
+    private void AddToCalendarButton_Click(object sender, RoutedEventArgs e)
+    {
+        var startUtc = _columnInstantsUtc[_selectedColumn];
+        var endUtc = startUtc.AddHours(1);
+
+        var ics = string.Join("\r\n", new[]
+        {
+            "BEGIN:VCALENDAR",
+            "VERSION:2.0",
+            "PRODID:-//WorldClockWidget//EN",
+            "BEGIN:VEVENT",
+            $"UID:{Guid.NewGuid()}",
+            $"DTSTAMP:{DateTime.UtcNow:yyyyMMddTHHmmssZ}",
+            $"DTSTART:{startUtc:yyyyMMddTHHmmssZ}",
+            $"DTEND:{endUtc:yyyyMMddTHHmmssZ}",
+            "SUMMARY:",
+            "END:VEVENT",
+            "END:VCALENDAR"
+        });
+
+        string path;
+        try
+        {
+            path = Path.Combine(Path.GetTempPath(), "WorldClockMeeting.ics");
+            File.WriteAllText(path, ics);
+        }
+        catch (IOException)
+        {
+            path = Path.Combine(Path.GetTempPath(), $"WorldClockMeeting_{Guid.NewGuid():N}.ics");
+            File.WriteAllText(path, ics);
+        }
+
+        try
+        {
+            Process.Start(new ProcessStartInfo(path) { UseShellExecute = true });
+        }
+        catch (Win32Exception)
+        {
+            MessageBox.Show(this,
+                "Couldn't find an app to open the calendar invite. Make sure a calendar app (Outlook, Windows Calendar) is set as the default handler for .ics files.",
+                "World Clock Widget", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 
     private void SelectColumn(int columnIndex)

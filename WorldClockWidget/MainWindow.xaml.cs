@@ -34,6 +34,7 @@ public partial class MainWindow : Window
     private DateTime _baseDate = DateTime.Today;
     private int _selectedColumn;
     private bool _alwaysOnTop;
+    private DispatcherTimer _liveClockTimer;
 
     public MainWindow()
     {
@@ -62,6 +63,10 @@ public partial class MainWindow : Window
         SizeWindowToRows();
 
         Loaded += (_, _) => GoToToday();
+
+        _liveClockTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+        _liveClockTimer.Tick += (_, _) => BuildGrid();
+        _liveClockTimer.Start();
     }
 
     private void SizeWindowToRows()
@@ -376,11 +381,24 @@ public partial class MainWindow : Window
         return grid;
     }
 
+    private static bool IsCurrentHour(DateTime instantUtc)
+    {
+        var now = DateTime.UtcNow;
+        var currentHourStart = new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0, DateTimeKind.Utc);
+        return instantUtc == currentHourStart;
+    }
+
     private UIElement BuildHourCell(TimeZoneRow row, int columnIndex)
     {
         var instantUtc = _columnInstantsUtc[columnIndex];
         var localTime = TimeZoneInfo.ConvertTimeFromUtc(instantUtc, row.Zone);
         var isDay = localTime.Hour is >= 6 and < 18;
+
+        // The highlighted column normally sits exactly on the hour, like every
+        // other column. When it's also the real current hour, show the actual
+        // live minute instead of ":00" so it reads as "right now."
+        var isLiveNow = columnIndex == _selectedColumn && IsCurrentHour(instantUtc);
+        var displayTime = isLiveNow ? TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, row.Zone) : localTime;
 
         var stack = new StackPanel
         {
@@ -397,8 +415,9 @@ public partial class MainWindow : Window
         });
         stack.Children.Add(new TextBlock
         {
-            Text = localTime.ToString("h:mm tt"),
+            Text = displayTime.ToString("h:mm tt"),
             FontSize = 12,
+            FontWeight = isLiveNow ? FontWeights.Bold : FontWeights.Normal,
             HorizontalAlignment = HorizontalAlignment.Center
         });
 

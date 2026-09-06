@@ -11,9 +11,7 @@
 
   <ItemGroup>
     <Resource Include="Assets\AppIcon.ico" />
-    <Content Include="Assets\Cities.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Assets\Cities.json" />
   </ItemGroup>
 
 </Project>

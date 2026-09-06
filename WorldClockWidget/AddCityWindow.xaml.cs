@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows;
@@ -54,16 +53,18 @@ public partial class AddCityWindow : Window
     {
         try
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "Assets", "Cities.json");
-            if (!File.Exists(path))
+            var assembly = typeof(AddCityWindow).Assembly;
+            var resourceName = assembly.GetManifestResourceNames()
+                .FirstOrDefault(n => n.EndsWith("Cities.json", StringComparison.OrdinalIgnoreCase));
+            if (resourceName == null)
             {
                 return new List<CityEntry>();
             }
 
-            var json = File.ReadAllText(path);
-            return JsonSerializer.Deserialize<List<CityEntry>>(json) ?? new List<CityEntry>();
+            using var stream = assembly.GetManifestResourceStream(resourceName);
+            return JsonSerializer.Deserialize<List<CityEntry>>(stream) ?? new List<CityEntry>();
         }
-        catch (Exception ex) when (ex is IOException or JsonException)
+        catch (JsonException)
         {
             return new List<CityEntry>();
         }

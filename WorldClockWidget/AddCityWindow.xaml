@@ -12,7 +12,7 @@
 
         <StackPanel Grid.Row="0">
             <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"/>
-            <TextBlock Text="Type at least 2 letters to search ~69,000 world cities and towns."
+            <TextBlock x:Name="HintText" Text="Loading city database..."
                        Foreground="Gray" FontSize="11" Margin="2,4,0,0"/>
         </StackPanel>
         <ListBox x:Name="ZoneList" Grid.Row="1" Margin="0,8,0,0" DisplayMemberPath="Label" MouseDoubleClick="ZoneList_MouseDoubleClick"/>

@@ -39,6 +39,10 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
+        // Start resolving the ~69,500-city list on a background thread now, so
+        // it's most likely already done by the time the user clicks "+ Add city".
+        CityDatabase.WarmUp();
+
         _rows.Add(new TimeZoneRow("Local time", TimeZoneInfo.Local, isLocal: true));
 
         if (File.Exists(SettingsPath))
@@ -55,7 +59,23 @@ public partial class MainWindow : Window
             SaveCities();
         }
 
+        SizeWindowToRows();
+
         Loaded += (_, _) => GoToToday();
+    }
+
+    private void SizeWindowToRows()
+    {
+        const double TitleBarHeight = 40;
+        const double ToolbarRowHeight = 70;
+        const double GridAreaMargin = 12;
+        const double ScrollBarAllowance = 18;
+
+        var desiredHeight = TitleBarHeight + ToolbarRowHeight + GridAreaMargin
+            + (_rows.Count * RowHeight) + ScrollBarAllowance;
+
+        var maxHeight = Math.Max(MinHeight, SystemParameters.WorkArea.Height - 40);
+        Height = Math.Clamp(desiredHeight, MinHeight, maxHeight);
     }
 
     private void LoadSavedCities()

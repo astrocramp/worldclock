@@ -11,10 +11,15 @@ built-in Windows Clock app. Built with WPF (.NET 8) and C#.
 - `WorldClockWidget/AddCityWindow.xaml(.cs)` — the "Add city" search dialog.
 - `WorldClockWidget/Models/TimeZoneRow.cs` — a small class representing one
   row (a city + its time zone).
-- `WorldClockWidget/Models/CityEntry.cs` / `Assets/Cities.json` — a curated
-  list of ~185 world cities mapped to Windows time zone IDs, so searching
-  "Munich" or "Bahrain" finds a real place instead of only the generic
-  region names Windows itself exposes.
+- `WorldClockWidget/Models/CityEntry.cs` / `Assets/Cities.json` — ~69,500
+  world cities and towns (population 5,000+) with their real time zones,
+  derived from the [GeoNames](https://www.geonames.org) geographical
+  database (CC BY 4.0) via the `geonamescache` Python package. This is what
+  makes searches like "Munich", "Bahrain", or even a small town like
+  "Warsaw, IN" resolve to their correct, sometimes non-obvious time zone
+  (time zone boundaries follow historical/political lines, not simple
+  geography), rather than only the handful of cities Windows itself lists
+  per zone.
 - `WorldClockWidget/Models/SavedCity.cs` — the shape of one saved city in
   `%AppData%\WorldClockWidget\cities.json`, where your added cities persist
   between runs.
@@ -69,8 +74,9 @@ WPF build tooling; later runs are fast.
 - **Month / day / year spinners** each scroll independently — use the mouse
   wheel over one, or the small chevron icons above/below it.
 - The 🎯-style **Today** icon jumps back to the current date and hour; the
-  **+** icon opens the add-city search dialog; each added city has a small
-  **✕** icon to remove it.
+  **+** icon opens the add-city search dialog (type at least 2 letters —
+  results are ranked by population, capped at 50 matches); each added city
+  has a small **✕** icon to remove it.
 - The **📌** icon toggles "always on top" (lights up when active).
 - The window is **frameless** — drag anywhere on the top bar to move it,
   and resize from any edge or corner. Minimize/close are the **─** / **✕**

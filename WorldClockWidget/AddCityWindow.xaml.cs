@@ -62,7 +62,8 @@ public partial class AddCityWindow : Window
             }
 
             using var stream = assembly.GetManifestResourceStream(resourceName);
-            return JsonSerializer.Deserialize<List<CityEntry>>(stream) ?? new List<CityEntry>();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            return JsonSerializer.Deserialize<List<CityEntry>>(stream, options) ?? new List<CityEntry>();
         }
         catch (JsonException)
         {

@@ -66,10 +66,13 @@ WPF build tooling; later runs are fast.
 
 ## 3. Using the app
 
-- **Scroll** the hour strip left/right (mouse wheel, trackpad, or the
-  scrollbar) to see what time it'll be in each city.
+- The leftmost column is always **right now** (live, updating every 30
+  seconds) when viewing today; **scroll right** (mouse wheel, trackpad, or
+  the scrollbar) to look ahead — there are no past hours to scroll back
+  through, since the point is finding a future time that works.
 - **Click any hour cell** to highlight that column across every city — a
-  quick way to eyeball a meeting time. Hours after sunset/before sunrise are
+  quick way to eyeball a meeting time. It keeps pointing at that same moment
+  even as the live column advances. Hours after sunset/before sunrise are
   shaded a light grey in addition to showing the moon icon.
 - **Month / day / year spinners** each scroll independently — use the mouse
   wheel over one, or the small chevron icons above/below it.

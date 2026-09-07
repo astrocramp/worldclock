@@ -18,9 +18,7 @@ public partial class MainWindow : Window
 {
     private const int ColumnWidth = 64;
     private const int RowHeight = 64;
-    private const int HoursBefore = 24;
-    private const int HoursAfter = 48;
-    private const int TotalColumns = HoursBefore + HoursAfter;
+    private const int TotalColumns = 72;
 
     private static readonly SolidColorBrush NightCellBrush = new(Color.FromRgb(0xE4, 0xE4, 0xEA));
 
@@ -65,8 +63,27 @@ public partial class MainWindow : Window
         Loaded += (_, _) => GoToToday();
 
         _liveClockTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
-        _liveClockTimer.Tick += (_, _) => BuildGrid();
+        _liveClockTimer.Tick += (_, _) => RefreshLiveClock();
         _liveClockTimer.Start();
+    }
+
+    // Column 0 tracks the real current hour while viewing today, so the whole
+    // array quietly slides forward as time passes. Without this, a column the
+    // user deliberately selected (e.g. "5 hours from now") would keep its old
+    // index and silently end up pointing at the wrong absolute time once an
+    // hour boundary passes - so re-find that same instant in the rebuilt array
+    // instead of trusting the old index.
+    private void RefreshLiveClock()
+    {
+        if (_baseDate == DateTime.Today && _columnInstantsUtc.Length > 0)
+        {
+            var selectedInstant = _columnInstantsUtc[_selectedColumn];
+            BuildColumns();
+            var index = Array.IndexOf(_columnInstantsUtc, selectedInstant);
+            _selectedColumn = index >= 0 ? index : 0;
+        }
+
+        BuildGrid();
     }
 
     private void SizeWindowToRows()
@@ -124,16 +141,27 @@ public partial class MainWindow : Window
     private void GoToToday()
     {
         _baseDate = DateTime.Today;
-        _selectedColumn = HoursBefore + DateTime.Now.Hour;
+        _selectedColumn = 0; // column 0 is always the current hour when viewing today
         BuildGrid();
         ScrollToColumn(_selectedColumn);
     }
 
+    // Moving to a different date keeps the same hour-of-day selected (e.g. "same
+    // time tomorrow"), found by its absolute instant rather than a fixed index,
+    // since column 0's meaning shifts between "now" (today) and midnight (any
+    // other date).
     private void SetBaseDate(DateTime newDate)
     {
-        var hourOfDay = ((_selectedColumn - HoursBefore) % 24 + 24) % 24;
+        var hourOfDay = TimeZoneInfo.ConvertTimeFromUtc(_columnInstantsUtc[_selectedColumn], TimeZoneInfo.Local).Hour;
+
         _baseDate = newDate.Date;
-        _selectedColumn = HoursBefore + hourOfDay;
+        BuildColumns();
+
+        var targetLocal = DateTime.SpecifyKind(_baseDate.AddHours(hourOfDay), DateTimeKind.Unspecified);
+        var targetUtc = TimeZoneInfo.ConvertTimeToUtc(targetLocal, TimeZoneInfo.Local);
+        var index = Array.IndexOf(_columnInstantsUtc, targetUtc);
+        _selectedColumn = index >= 0 ? index : 0;
+
         BuildGrid();
         ScrollToColumn(_selectedColumn);
     }
@@ -248,15 +276,29 @@ public partial class MainWindow : Window
 
     // Columns are stored as absolute UTC instants so every row's local time is
     // derived with proper per-zone DST handling instead of a fixed hour offset.
+    // Column 0 is always the start of the view: the real current hour when
+    // looking at today, or midnight when looking at a different date - either
+    // way, everything runs forward only (no past hours to scroll back through).
     private void BuildColumns()
     {
         _columnInstantsUtc = new DateTime[TotalColumns];
-        var localMidnight = DateTime.SpecifyKind(_baseDate, DateTimeKind.Unspecified);
+        var anchorUtc = GetAnchorUtc();
         for (var i = 0; i < TotalColumns; i++)
         {
-            var localInstant = localMidnight.AddHours(i - HoursBefore);
-            _columnInstantsUtc[i] = TimeZoneInfo.ConvertTimeToUtc(localInstant, TimeZoneInfo.Local);
+            _columnInstantsUtc[i] = anchorUtc.AddHours(i);
         }
+    }
+
+    private DateTime GetAnchorUtc()
+    {
+        if (_baseDate == DateTime.Today)
+        {
+            var now = DateTime.UtcNow;
+            return new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0, DateTimeKind.Utc);
+        }
+
+        var midnightLocal = DateTime.SpecifyKind(_baseDate, DateTimeKind.Unspecified);
+        return TimeZoneInfo.ConvertTimeToUtc(midnightLocal, TimeZoneInfo.Local);
     }
 
     private void BuildGrid()
